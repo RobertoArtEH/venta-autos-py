@@ -14,16 +14,19 @@ class Empleado():
     def getSalary(self):
         return self.salary
 
-    def newSale(self, price):
+    def newSale(self, brand, model, price):
         self.salary += self.bono
-        self.cars.newCar(price)
+        self.cars.newCar(brand, model, price)
+
+    def getCars(self):
+        return self.cars.getCars()
 
     def finalSalary(self):
         carsTotal = 0
-        car = self.cars.getCars()
+        cars = self.cars.getCars()
 
-        for price in car:
-            carsTotal += price
+        for car in cars:
+            carsTotal += car['price']
 
         carsTotal = carsTotal * 0.02
         self.salary += carsTotal
