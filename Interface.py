@@ -1,5 +1,6 @@
-from Empleado import Empleado
 from Ventas import Ventas
+from Empleado import Empleado
+from Archivo import Archivo
 
 class Interface():
     def __init__(self):
@@ -47,6 +48,7 @@ class Interface():
 
     def askNewEmployee(self):
         answer = self.askEmployee()
+        print(answer)
         while not answer == 'n':
             self.newEmployee()
             answer = self.askEmployee()
@@ -60,17 +62,24 @@ class Interface():
 
     def printNomina(self):
         print('---------------------')
-        print('Nomina: ${0}'.format(self.sales.getSales()))
+        print('Nomina: ${0}'.format(self.sales.getNomina()))
 
-    def showReportMenu(self):
-        print('\x1b[6;30;42m' + 'Menú de Reportes' + '\x1b[0m')
-        print('Selecciona la opción que desees:')
-        print('1) Guardar reporte')
-        print('2) Salir')
+    def loadFile(self):
+        answer = input('¿Deseas cargar el archivo? (s/n): ')
+        if(answer == 's'):
+            file = Archivo()
+            self.sales.setEmployees(file.loadList())
+    
+    def saveFile(self, employees):
+        answer = input('¿Deseas guardar el archivo? (s/n): ')
+        if(answer == 's'):
+            file = Archivo()
+            file.saveList(employees)
+            self.printEmployees()
 
     def run(self):
-        self.newEmployee()
+        self.loadFile()
         self.askNewEmployee()
         self.printEmployees()
         self.printNomina()
-        # self.showReportMenu()
+        self.saveFile(self.sales.getSales())

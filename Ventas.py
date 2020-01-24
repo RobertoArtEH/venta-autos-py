@@ -5,6 +5,9 @@ class Ventas():
     def newSale(self, empleado):
         self.sales.append(empleado)
 
+    def getSales(self):
+        return self.sales
+
     def getNames(self):
         names = []
 
@@ -13,10 +16,13 @@ class Ventas():
 
         return names
 
-    def getSales(self):
+    def getNomina(self):
         nomina = 0
 
         for employee in self.sales:
             nomina += employee.salary
 
         return nomina
+
+    def setEmployees(self, employees):
+        self.sales = employees
