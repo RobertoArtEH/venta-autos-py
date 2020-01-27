@@ -1,4 +1,3 @@
-from Ventas import Ventas
 from Automovil import Automovil
 
 class Empleado():

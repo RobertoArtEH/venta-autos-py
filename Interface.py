@@ -24,7 +24,7 @@ class Interface():
     def printSalary(self, employee):
         employee.finalSalary()
         salary = employee.getSalary()
-        self.sales.newSale(employee)
+        self.sales.newEmployee(employee)
 
         print('\x1b[6;30;42m' + '* Salario de {0}: ${1}'.format(employee.getName(), employee.getSalary()) + '\x1b[0m')
 
@@ -48,7 +48,6 @@ class Interface():
 
     def askNewEmployee(self):
         answer = self.askEmployee()
-        print(answer)
         while not answer == 'n':
             self.newEmployee()
             answer = self.askEmployee()
@@ -65,10 +64,13 @@ class Interface():
         print('Nomina: ${0}'.format(self.sales.getNomina()))
 
     def loadFile(self):
-        answer = input('¿Deseas cargar el archivo? (s/n): ')
-        if(answer == 's'):
-            file = Archivo()
-            self.sales.setEmployees(file.loadList())
+        try:
+            with open('sales_list') as f:
+                file = Archivo()
+                self.sales.setEmployees(file.loadList())
+        except IOError:
+            print('No se encontró ningun reporte...')
+
     
     def saveFile(self, employees):
         answer = input('¿Deseas guardar el archivo? (s/n): ')
@@ -79,7 +81,8 @@ class Interface():
 
     def run(self):
         self.loadFile()
+        self.newEmployee()
         self.askNewEmployee()
         self.printEmployees()
         self.printNomina()
-        self.saveFile(self.sales.getSales())
+        self.saveFile(self.sales.getEmployees())
