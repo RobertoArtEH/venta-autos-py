@@ -1,11 +1,11 @@
-from Automovil import Automovil
+from Automoviles import Automoviles
 
 class Empleado():
     def __init__(self, name):
         self.name = name
         self.salary = 2000
         self.bono = 1000
-        self.cars = Automovil()
+        self.cars = Automoviles()
 
     def getName(self):
         return self.name
@@ -21,11 +21,4 @@ class Empleado():
         return self.cars.getCars()
 
     def finalSalary(self):
-        carsTotal = 0
-        cars = self.cars.getCars()
-
-        for car in cars:
-            carsTotal += car['price']
-
-        carsTotal = carsTotal * 0.02
-        self.salary += carsTotal
+        self.salary += self.cars.getCarsComision()

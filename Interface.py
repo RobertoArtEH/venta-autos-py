@@ -70,7 +70,6 @@ class Interface():
                 self.sales.setEmployees(file.loadList())
         except IOError:
             print('No se encontró ningun reporte...')
-
     
     def saveFile(self, employees):
         answer = input('¿Deseas guardar el archivo? (s/n): ')
